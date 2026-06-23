@@ -1,5 +1,6 @@
 package com.jinxi.platform.controller;
 
+import com.jinxi.platform.dto.LoginDTO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,10 +26,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-
-
-
-
 
 @RestController
 @RequestMapping("/user")
@@ -64,6 +61,11 @@ public class UserController {
     public Result<Void> update(@RequestBody@Valid UserUpdateDTO dto) {
         userService.update(dto);
         return Result.success();
+    }
+    // 登录
+    @PostMapping("/login")
+    public Result<String> login(@RequestBody @Valid LoginDTO dto) {
+        return Result.success(userService.login(dto));
     }
 
 }

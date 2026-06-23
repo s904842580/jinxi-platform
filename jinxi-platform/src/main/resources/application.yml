@@ -13,3 +13,6 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+jwt:
+  secret: iG9HzCRyYwYUUneTiHHVXPn1wG2SdJ416fKh5Vof8+Q= # 至少 32 个字符
+  expiration: 86400000  # 1 天，单位毫秒

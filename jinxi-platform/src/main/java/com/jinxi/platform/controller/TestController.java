@@ -1,41 +1,39 @@
 package com.jinxi.platform.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jinxi.platform.common.BaseResponse;
+import com.jinxi.platform.common.exception.BusinessException;
+import com.jinxi.platform.common.util.ResultUtil;
+import com.jinxi.platform.mapper.UserMapper;
+import com.jinxi.platform.vo.User.UserListVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jinxi.platform.common.Result;
-import com.jinxi.platform.common.exception.BusinessException;
-import com.jinxi.platform.entity.User;
-import com.jinxi.platform.mapper.UserMapper;
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/test")
+@RequiredArgsConstructor
 public class TestController {
+
     private final UserMapper userMapper;
 
-     // 构造器注入（可以换成 @RequiredArgsConstructor）
-    TestController(UserMapper userMapper) {
-        this.userMapper = userMapper;
+    @GetMapping
+    public BaseResponse<String> test() {
+        return ResultUtil.resSuccesResult("hello platform");
     }
 
-    @GetMapping
-    public Result<String> test() {
-        return Result.success(
-            "hello platform"
-        );
-    }
     @GetMapping("/user")
-    public List<User> list() {
-    return userMapper.selectList(null);
-}
+    public BaseResponse<List<UserListVO>> list() {
+        List<UserListVO> users = userMapper.selectList(null).stream()
+                .map(UserListVO::from)
+                .toList();
+        return ResultUtil.resSuccesResult(users, users.size());
+    }
+
     @GetMapping("/error")
-    public Result<String> error(){
+    public BaseResponse<String> error() {
         throw new BusinessException("异常测试");
     }
-
 }

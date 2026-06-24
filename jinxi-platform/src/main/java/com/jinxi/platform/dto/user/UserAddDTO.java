@@ -1,4 +1,4 @@
-package com.jinxi.platform.dto;
+package com.jinxi.platform.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

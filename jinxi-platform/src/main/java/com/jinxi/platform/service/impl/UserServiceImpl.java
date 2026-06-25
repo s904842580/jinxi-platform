@@ -12,6 +12,7 @@ import com.jinxi.platform.dto.user.UserAddDTO;
 import com.jinxi.platform.dto.user.UserListDTO;
 import com.jinxi.platform.dto.user.UserUpdateDTO;
 import com.jinxi.platform.entity.User;
+import com.jinxi.platform.enums.AccountTypeEnum;
 import com.jinxi.platform.mapper.UserMapper;
 import com.jinxi.platform.service.UserService;
 import com.jinxi.platform.service.repository.UserRepository;
@@ -23,8 +24,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 //        List<UserVO> users = page.getRecords().stream()
 //                .map(UserVO::from)
 //                .toList();
-        return ResultUtil.resSuccessPageResult(page, UserListVO.class);
+        return ResultUtil.page(page, UserListVO.class);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
-        return ResultUtil.resSuccesResult(userVO, "查询成功");
+        return ResultUtil.success(userVO, "查询成功");
     }
 
     @Override
@@ -74,7 +73,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!save(user)) {
             throw new ServiceException("注册失败");
         }
-        return ResultUtil.resSuccesResult("注册成功");
+        return ResultUtil.successMessage("注册成功");
     }
 
     @Override
@@ -101,7 +100,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!userRepository.updateById(user)) {
             throw new ServiceException("更新失败");
         }
-        return ResultUtil.resSuccesResult("更新成功");
+        return ResultUtil.successMessage("更新成功");
     }
 
     @Override
@@ -112,27 +111,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!removeById(id)) {
             throw new ServiceException("删除失败");
         }
-        return ResultUtil.resSuccesResult("删除成功");
+        return ResultUtil.successMessage("删除成功");
     }
 
     @Override
     public BaseResponse<?> login(LoginDTO dto) {
-        User user;
-        if (StringUtils.hasText(dto.getUsername())) {
-            user = userRepository.findByUsername(dto.getUsername());
-        } else if (StringUtils.hasText(dto.getEmail())) {
-            user = userRepository.findByEmail(dto.getEmail());
-        } else if (StringUtils.hasText(dto.getPhone())) {
-            user = userRepository.findByPhone(dto.getPhone());
-        } else {
-            throw new ServiceException("请提供用户名、邮箱或手机号");
-        }
+        String account = dto.getAccount().trim();
+        AccountTypeEnum accountType = AccountTypeEnum.resolve(account);
+        User user = userRepository.findByAccount(account, accountType);
 
         if (user == null || !passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
-            throw new ServiceException("用户名或密码错误");
+            throw new ServiceException("账号或密码错误");
         }
 
         String token = jwtUtil.generateToken(user.getId(), user.getUsername());
-        return ResultUtil.resSuccesResult(new LoginVO(token, UserListVO.from(user)), "登录成功");
+        return ResultUtil.success(new LoginVO(token, UserListVO.from(user)), "登录成功");
     }
 }

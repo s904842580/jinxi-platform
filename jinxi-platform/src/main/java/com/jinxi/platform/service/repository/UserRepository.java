@@ -3,6 +3,7 @@ package com.jinxi.platform.service.repository;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jinxi.platform.entity.User;
+import com.jinxi.platform.enums.AccountTypeEnum;
 import com.jinxi.platform.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,15 @@ public class UserRepository extends ServiceImpl<UserMapper, User> {
     public User findByPhone(String phone) {
         return this.getOne(new LambdaQueryWrapper<User>().eq(User::getPhone, phone));
     }
+
+    public User findByAccount(String account, AccountTypeEnum accountType) {
+        return switch (accountType) {
+            case EMAIL -> findByEmail(account);
+            case PHONE -> findByPhone(account);
+            case USERNAME -> findByUsername(account);
+        };
+    }
+
     // ============ 存在性检查 ============
 
     public boolean existsByUsername(String username) {

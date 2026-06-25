@@ -39,7 +39,7 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
             return body;
         }
 
-        BaseResponse<Object> result = ResultUtil.resSuccesResult(body);
+        BaseResponse<Object> result = ResultUtil.success(body);
         if (body instanceof String) {
             try {
                 response.getHeaders().setContentType(MediaType.APPLICATION_JSON);

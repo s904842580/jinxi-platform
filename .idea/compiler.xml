@@ -9,17 +9,8 @@
         <processorPath useClasspath="false">
           <entry name="G:/maven/repository/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
-        <module name="jinxi-common" />
-      </profile>
-      <profile name="Annotation profile for jinxi-platform" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="G:/maven/repository/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="G:/maven/repository/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-        </processorPath>
         <module name="jinxi-platform" />
+        <module name="jinxi-common" />
       </profile>
     </annotationProcessing>
   </component>

@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public BaseResponse<Void> handleBusinessException(BusinessException e) {
         log.error("业务异常", e);
-        return ResultUtil.resErrorResult(e.getMessage());
+        return ResultUtil.error(e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -24,17 +24,17 @@ public class GlobalExceptionHandler {
         if (e.getBindingResult().getFieldError() != null) {
             msg = e.getBindingResult().getFieldError().getDefaultMessage();
         }
-        return ResultUtil.resErrorResult(msg);
+        return ResultUtil.error(msg);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public BaseResponse<Void> handleConstraintViolationException(ConstraintViolationException e) {
-        return ResultUtil.resErrorResult(e.getMessage());
+        return ResultUtil.error(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
     public BaseResponse<Void> handleException(Exception e) {
         log.error("系统异常", e);
-        return ResultUtil.resErrorResult("系统繁忙");
+        return ResultUtil.error("系统繁忙");
     }
 }

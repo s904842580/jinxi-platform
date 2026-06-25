@@ -21,7 +21,7 @@ public class TestController {
 
     @GetMapping
     public BaseResponse<String> test() {
-        return ResultUtil.resSuccesResult("hello platform");
+        return ResultUtil.success("hello platform");
     }
 
     @GetMapping("/user")
@@ -29,7 +29,7 @@ public class TestController {
         List<UserListVO> users = userMapper.selectList(null).stream()
                 .map(UserListVO::from)
                 .toList();
-        return ResultUtil.resSuccesResult(users);
+        return ResultUtil.success(users);
     }
 
     @GetMapping("/error")

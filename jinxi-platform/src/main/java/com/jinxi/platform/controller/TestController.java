@@ -29,7 +29,7 @@ public class TestController {
         List<UserListVO> users = userMapper.selectList(null).stream()
                 .map(UserListVO::from)
                 .toList();
-        return ResultUtil.resSuccesResult(users, users.size());
+        return ResultUtil.resSuccesResult(users);
     }
 
     @GetMapping("/error")

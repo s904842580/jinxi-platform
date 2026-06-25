@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * 全局统一接口响应对象。
  *
@@ -18,14 +16,11 @@ import java.util.List;
 @Builder
 public class BaseResponse<T> {
 
+    @Builder.Default
     private Integer code = ResultCode.SUCCESS.getCode();
 
     private String message;
 
     private T data;
-
-    private List<T> list;
-
-    private long totalCount;
 
 }

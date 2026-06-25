@@ -1,13 +1,15 @@
 package com.jinxi.platform.common.exception;
 
 import com.jinxi.platform.common.ResultCode;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serial;
 
 @Slf4j
-@Data
+@Getter
+@Setter
 public class ServiceException extends RuntimeException {
 
     @Serial

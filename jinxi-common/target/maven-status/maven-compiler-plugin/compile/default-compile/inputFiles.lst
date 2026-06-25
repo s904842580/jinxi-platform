@@ -1,8 +1,11 @@
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\BaseResponse.java
+E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\context\LoginUser.java
+E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\context\UserContext.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\exception\BusinessException.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\exception\GlobalExceptionHandler.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\exception\ServiceException.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\GlobalResponseAdvice.java
+E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\interceptor\JwtAuthInterceptor.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\PageResult.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\ResultCode.java
 E:\projects\jinxi-platform\jinxi-common\src\main\java\com\jinxi\platform\common\util\ConvertUtil.java

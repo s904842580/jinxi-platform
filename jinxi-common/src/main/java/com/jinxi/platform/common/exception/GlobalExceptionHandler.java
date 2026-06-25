@@ -1,6 +1,7 @@
 package com.jinxi.platform.common.exception;
 
 import com.jinxi.platform.common.BaseResponse;
+import com.jinxi.platform.common.ResultCode;
 import com.jinxi.platform.common.util.ResultUtil;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ServiceException.class)
+    public BaseResponse<Void> handleServiceException(ServiceException e) {
+        log.warn("业务异常: {}", e.getMessage());
+        Integer code = e.getCode() != null ? e.getCode() : ResultCode.FAILURE.getCode();
+        String message = e.getMessage() != null ? e.getMessage() : ResultCode.FAILURE.getMessage();
+        return ResultUtil.error(code, message);
+    }
 
     @ExceptionHandler(BusinessException.class)
     public BaseResponse<Void> handleBusinessException(BusinessException e) {

@@ -17,29 +17,31 @@ public class ServiceException extends RuntimeException {
 
     private ResultCode resultCode;
 
-    private String message;
-
     private Integer code;
 
     public ServiceException(Integer code, String message){
+        super(message);
         this.code = code;
-        this.message = message;
     }
     public ServiceException(String message){
         super(message);
         this.resultCode = ResultCode.FAILURE;
+        this.code = ResultCode.FAILURE.getCode();
     }
     public  ServiceException(ResultCode resultCode){
         super(resultCode.getMessage());
         this.resultCode = resultCode;
+        this.code = resultCode.getCode();
     }
     public ServiceException(ResultCode resultCode, String message){
         super(message);
         this.resultCode = resultCode;
+        this.code = resultCode.getCode();
     }
     public ServiceException(ResultCode resultCode, String message, Throwable cause){
         super(message, cause);
         this.resultCode = resultCode;
+        this.code = resultCode.getCode();
     }
 
     @Override

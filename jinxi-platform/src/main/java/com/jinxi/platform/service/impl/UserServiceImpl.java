@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jinxi.platform.common.BaseResponse;
+import com.jinxi.platform.common.context.UserContext;
 import com.jinxi.platform.common.exception.ServiceException;
 import com.jinxi.platform.common.util.JwtUtil;
 import com.jinxi.platform.common.util.ResultUtil;

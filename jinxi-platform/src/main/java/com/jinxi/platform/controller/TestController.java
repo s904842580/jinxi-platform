@@ -4,6 +4,7 @@ import com.jinxi.platform.common.BaseResponse;
 import com.jinxi.platform.common.exception.BusinessException;
 import com.jinxi.platform.common.util.ResultUtil;
 import com.jinxi.platform.mapper.UserMapper;
+import com.jinxi.platform.service.UserService;
 import com.jinxi.platform.vo.User.UserListVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 public class TestController {
 
     private final UserMapper userMapper;
+    private final UserService userService;
 
     @GetMapping
     public BaseResponse<String> test() {

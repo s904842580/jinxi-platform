@@ -1,5 +1,6 @@
 package com.jinxi.platform.common.util;
 
+import com.jinxi.platform.common.context.LoginUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -103,4 +104,14 @@ public final class JwtUtil {
     public String getJti(String token) {
         return parseToken(token).getId();
     }
+
+    public LoginUser getLoginUser(String token){
+        Claims claims = parseToken(token);
+
+        Long userId = Long.valueOf(String.valueOf(claims.get("userId")));
+        String username = claims.get("username",String.class);
+
+        return new LoginUser(userId,username);
+    }
+
 }
